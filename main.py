@@ -103,7 +103,6 @@ for word in word_list:
     print(f'total score for word --- {word} --- = {score}')
     word_scores[word] = score
 
-# print(word_scores)
 print('\n')
 print(f'{len(word_list)} possible answers')
 print(f'Suggested guess: {max(word_scores, key=word_scores.get)}')

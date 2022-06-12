@@ -97,9 +97,9 @@ word_scores = {}
 
 cumulative_frequencies = find_cumulative_frequencies(word_list)
 for word in word_list:
-    score = 0
+    score = 1
     for index in range(len(word)):
-        score += cumulative_frequencies[word[index]][index]
+        score *= cumulative_frequencies[word[index]][index]
     print(f'total score for word --- {word} --- = {score}')
     word_scores[word] = score
 

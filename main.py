@@ -133,7 +133,6 @@ while program_is_running:
         yellow_letters = []
         green_letters = []
         for code_index in range(5):
-            # print(f'code[letter] = {code[code_index]}')
             if code[code_index] == 'y':
                 yellow_letters.append(guess[code_index])
             elif code[code_index] == 'g':
@@ -144,11 +143,6 @@ while program_is_running:
                 code[i] = 'y'
             if code[i] == '-' and guess[i] in green_letters:
                 code[i] = 'y'
-        #     print(f'guess[i] = {guess[i]} code[i] = {code[i]}')
-        #
-        # print(f'green letters -> {green_letters}')
-        # print(f'yellow letters -> {yellow_letters}')
-        # print(code)
 
         wrong_words = []
         for word in word_list:

@@ -103,6 +103,7 @@ for word in word_list:
     print(f'total score for word --- {word} --- = {score}')
     word_scores[word] = score
 
+# print(word_scores)
 print('\n')
 print(f'{len(word_list)} possible answers')
 print(f'Suggested guess: {max(word_scores, key=word_scores.get)}')
@@ -122,11 +123,32 @@ while program_is_running:
         code_allowed_characters = ['g', 'y', '-']
         code = list(
             input('Please input the code for your first guess (- = wrong letter, y = yellow letter, g = green letter): '))
+
         for letter_index in range(5):
             while len(code) != 5:
                 code = input('Invalid input. Please try again: ')
             while code[letter_index] not in code_allowed_characters:
                 code = input('Invalid input. Please try again: ')
+
+        yellow_letters = []
+        green_letters = []
+        for code_index in range(5):
+            # print(f'code[letter] = {code[code_index]}')
+            if code[code_index] == 'y':
+                yellow_letters.append(guess[code_index])
+            elif code[code_index] == 'g':
+                green_letters.append(guess[code_index])
+
+        for i in range(5):
+            if code[i] == '-' and guess[i] in yellow_letters:
+                code[i] = 'y'
+            if code[i] == '-' and guess[i] in green_letters:
+                code[i] = 'y'
+        #     print(f'guess[i] = {guess[i]} code[i] = {code[i]}')
+        #
+        # print(f'green letters -> {green_letters}')
+        # print(f'yellow letters -> {yellow_letters}')
+        # print(code)
 
         wrong_words = []
         for word in word_list:
@@ -176,5 +198,12 @@ while program_is_running:
         else:
             print(f'There are {len(word_list)} possible answers')
 
-        print(f'The suggested guess is: {max(word_scores, key=word_scores.get)}')
-        print(f'{max(word_scores, key=word_scores.get).title()} has a cumulative frequency score of: {word_scores[max(word_scores, key=word_scores.get)]}')
+        print(f'You now have a {((1/len(word_list)) * 100):.2f}% chance of solving the Wordle on this turn')
+
+        if len(word_list) == 1:
+            print(f'The suggested guess is: {max(word_scores, key=word_scores.get)}')
+            print(f'{max(word_scores, key=word_scores.get).title()} has a cumulative frequency score of: {word_scores[max(word_scores, key=word_scores.get)]}')
+        else:
+            print(f'The two suggested guesses are: {max(word_scores, key=word_scores.get)}, {min(word_scores, key=word_scores.get)}')
+            print(f'{max(word_scores, key=word_scores.get).title()} has a cumulative frequency score of: {word_scores[max(word_scores, key=word_scores.get)]}')
+            print(f'{min(word_scores, key=word_scores.get).title()} has a cumulative frequency score of: {word_scores[min(word_scores, key=word_scores.get)]}')
